@@ -1,5 +1,6 @@
 package com.VasianinIlia;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +8,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Main {
     public static void getWeatherFromWeb(String webURL) throws IOException {
@@ -32,10 +35,27 @@ public class Main {
 
     }
 
+    public static String getTime(){
+        LocalTime localTime = LocalTime.now();
+        StringBuffer lt = new StringBuffer(localTime + "");
+        String result = ""+ lt.delete(5, 18);
+        return result;
+    }
+    public static String getDate(){
+        LocalDate localDate = LocalDate.now();
+        int year = localDate.getYear();
+        int month = localDate.getMonthValue();
+        int day = localDate.getDayOfMonth();
+        String date = day + "." + month + "." + year;
+        return date;
+    }
+
     public static void main(String[] args) throws IOException {
         String url = "http://www.meteo.nw.ru/";
         // строка с температурой "<div id="wtemp" class="pos float">"
 
         getWeatherFromWeb(url);
+        System.out.println(getTime());
+        System.out.println(getDate());
     }
 }
