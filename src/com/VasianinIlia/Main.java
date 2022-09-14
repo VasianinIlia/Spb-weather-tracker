@@ -38,7 +38,7 @@ public class Main {
     public static String getTime(){
         LocalTime localTime = LocalTime.now();
         StringBuffer lt = new StringBuffer(localTime + "");
-        String result = ""+ lt.delete(5, 18);
+        String result = ""+ lt.delete(8, 18);
         return result;
     }
     public static String getDate(){
@@ -46,7 +46,7 @@ public class Main {
         int year = localDate.getYear();
         int month = localDate.getMonthValue();
         int day = localDate.getDayOfMonth();
-        String date = day + "." + month + "." + year;
+        String date = year + "-" + month + "-" + day;
         return date;
     }
 
