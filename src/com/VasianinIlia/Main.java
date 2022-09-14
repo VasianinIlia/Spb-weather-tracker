@@ -20,7 +20,12 @@ public class Main {
             String line;
             while ((line = br.readLine()) != null) {
                 if(line.contains("<div id=\"wtemp\" class=\"pos float\">")){
-                    System.out.println(line.substring(63,68));
+                        String plusCleaner = line.substring(63, 64);
+                        if (plusCleaner.equals("+")){
+                            System.out.println(line.substring(64, 68));
+                        }else {
+                            System.out.println(line.substring(63, 68));
+                        }
                 }
             }
         }
