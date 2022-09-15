@@ -1,6 +1,5 @@
 package com.VasianinIlia;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,6 +57,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String url = "http://www.meteo.nw.ru/";
         // строка с температурой "<div id="wtemp" class="pos float">"
+        System.out.println(MySqlQuery.selectAll());
 
         getWeatherFromWeb(url);
         System.out.println(getTime());
