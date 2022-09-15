@@ -11,19 +11,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Main {
-    public static void getWeatherFromWeb(String webURL) throws IOException {
+    public static String getWeatherFromWeb(String webURL) throws IOException {
         URL url = new URL(webURL);
         URLConnection connection= url.openConnection();
         InputStream is =  connection.getInputStream();
+        String result = "";
         try( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if(line.contains("<div id=\"wtemp\" class=\"pos float\">")){
                         String plusCleaner = line.substring(63, 64);
                         if (plusCleaner.equals("+")){
-                            System.out.println(line.substring(64, 68));
+                            result = line.substring(64, 68);
                         }else {
-                            System.out.println(line.substring(63, 68));
+                            result = line.substring(63, 68);
                         }
                 }
             }
@@ -36,7 +37,7 @@ public class Main {
             e.printStackTrace();
             throw new IOException();
         }
-
+        return result;
     }
 
     public static String getTime(){
@@ -58,8 +59,7 @@ public class Main {
         String url = "http://www.meteo.nw.ru/";
         // строка с температурой "<div id="wtemp" class="pos float">"
         System.out.println(MySqlQuery.selectAll());
-
-        getWeatherFromWeb(url);
+        System.out.println(getWeatherFromWeb(url));
         System.out.println(getTime());
         System.out.println(getDate());
     }
