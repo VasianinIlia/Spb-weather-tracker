@@ -26,7 +26,29 @@ public class MySqlQuery {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally{
+            try{con.close();} catch (SQLException se){se.printStackTrace();}
+            try{stmt.close();} catch (SQLException se){se.printStackTrace();}
+            try{rs.close();} catch (SQLException se){se.printStackTrace();}
         }
         return info;
     }
+
+    public static void insert(String temperature, String date, String time){
+        String query = "insert into app.weather(temperature, date, time) " +
+                "values(" + temperature + ", '" + date + "', '" + time + "')";
+        try {
+            con = DriverManager.getConnection(url, user, password);
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }finally{
+            try{con.close();} catch (SQLException se){se.printStackTrace();}
+            try{stmt.close();} catch (SQLException se){se.printStackTrace();}
+            try{rs.close();} catch (SQLException se){se.printStackTrace();}
+        }
+    }
+
 }
