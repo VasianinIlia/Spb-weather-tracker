@@ -11,18 +11,20 @@ public class MySqlQuery {
     private static Statement stmt;
     private static ResultSet rs;
 
-    public static String selectAll(){
+    public static void selectAll(){
         String query = "select * from weather";
-        String info = "";
         try {
             con = DriverManager.getConnection(url, user, password);
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
 
             while (rs.next()){
-
-                info = "id:" + rs.getString(1) + ", Temperature: " + rs.getString(2) +
-                        "C, Date: " + rs.getString(3) + ", Time: " + rs.getString(4);
+                int id = rs.getInt(1);
+                float temperature = rs.getFloat(2);
+                String date = rs.getString(3);
+                String time = rs.getString(4);
+                System.out.println("id:" + id + ", Temperature: " + temperature +
+                        "C, Date: " + date + ", Time: " + time);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,7 +33,6 @@ public class MySqlQuery {
             try{stmt.close();} catch (SQLException se){se.printStackTrace();}
             try{rs.close();} catch (SQLException se){se.printStackTrace();}
         }
-        return info;
     }
 
     public static void insert(String temperature, String date, String time){

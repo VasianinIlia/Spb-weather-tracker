@@ -58,7 +58,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String url = "http://www.meteo.nw.ru/";
         // строка с температурой "<div id="wtemp" class="pos float">"
-        System.out.println(MySqlQuery.selectAll());
+        MySqlQuery.selectAll();
         for(;;){
             String currentTemperature = getWeatherFromWeb(url);
             String currentTime = getTime();
