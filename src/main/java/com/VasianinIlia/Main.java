@@ -59,12 +59,21 @@ public class Main {
         String url = "http://www.meteo.nw.ru/";
         // строка с температурой "<div id="wtemp" class="pos float">"
         System.out.println(MySqlQuery.selectAll());
-        String currentTemperature = getWeatherFromWeb(url);
-        String currentTime = getTime();
-        String currentDate = getDate();
-        MySqlQuery.insert(currentTemperature, currentDate,currentTime);
-        System.out.println(currentTemperature);
-        System.out.println(currentTime);
-        System.out.println(currentDate);
+        for(;;){
+            String currentTemperature = getWeatherFromWeb(url);
+            String currentTime = getTime();
+            String currentDate = getDate();
+            System.out.println(currentTemperature);
+            System.out.println(currentTime);
+            System.out.println(currentDate);
+            MySqlQuery.insert(currentTemperature, currentDate,currentTime);
+            try{
+                Thread.sleep(1800000);
+            }catch (InterruptedException ie){
+                ie.printStackTrace();
+            }
+        }
+
+
     }
 }
